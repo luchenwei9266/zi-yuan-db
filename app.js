@@ -10,9 +10,14 @@ var connection = mysql.createConnection({
 
 connection.connect();
 
-schedule.scheduleJob('30 1 * * * *', function() {
-    UpdateDataBase();
-});
+const scheduleCronstyle = () => {
+    //每分钟的第30秒定时执行一次:
+    schedule.scheduleJob('30 * * * * *', () => {
+        UpdateDataBase();
+    });
+}
+
+scheduleCronstyle();
 
 function UpdateDataBase() {
     var sql = `DELETE FROM dataList`;
